@@ -19,6 +19,7 @@
 
 package org.isoron.uhabits.notifications;
 
+import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -211,7 +212,7 @@ public class NotificationTray
                 .addAction(checkAction)
                 .addAction(snoozeAction);
 
-            Notification notification = new NotificationCompat.Builder(context)
+            @SuppressLint("InlinedApi") Notification notification = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(habit.getName())
                 .setContentText(habit.getDescription())
@@ -224,6 +225,7 @@ public class NotificationTray
                 .setWhen(reminderTime)
                 .setShowWhen(true)
                 .setOngoing(preferences.shouldMakeNotificationsSticky())
+                .setPriority(Notification.PRIORITY_MAX)
                 .build();
 
             NotificationManager notificationManager =
